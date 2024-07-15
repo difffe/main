@@ -41,7 +41,7 @@ def analyze_explorer():
                 process_exe = proc.info['exe']
                 
                 if not process_exe.lower().startswith(system32_path):
-                    # Verificar si la ruta ya ha sido impresa
+                
                     if process_exe not in printed_paths:
                         print(f"[{Fore.RED}Explorer{Fore.RESET}] Executed File: {process_exe}")
                         printed_paths.add(process_exe)
@@ -78,14 +78,12 @@ def analyze_diagtrack(file_path):
                     if colon_pos != -1 and colon_pos + 2 < len(line):
                         matched_string = line[colon_pos + 2:].strip()
 
-                        # Filtrar la ruta específica
                         if matched_string.startswith(system32_path):
                             continue
 
                         if re.match(regex_diagtrack_pattern1, matched_string):
                             print(f"[{Fore.RED}Diagtrack{Fore.RESET}] Executed & File with modified extension: {matched_string}")
 
-                            # Check if file is signed
                             if is_file_present(matched_string):
                                 if is_file_signed(matched_string):
                                     print(f"[{Fore.RED}Diagtrack{Fore.RESET}] File with modified extension is signed: {matched_string}")
@@ -97,7 +95,6 @@ def analyze_diagtrack(file_path):
                         elif re.match(regex_diagtrack_pattern2, matched_string):
                             print(f"[{Fore.RED}Diagtrack{Fore.RESET}] Executed & .exe file: {matched_string}")
 
-                            # Check if .exe file is signed
                             if is_file_present(matched_string):
                                 if is_file_signed(matched_string):
                                     print(f"[{Fore.RED}Diagtrack{Fore.RESET}] .exe file is signed: {matched_string}")
